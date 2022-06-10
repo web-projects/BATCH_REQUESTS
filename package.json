@@ -9,9 +9,15 @@
     "npm": "^8.8.0"
   },
   "scripts": {
+    "test": "mocha \"specs/**/*.spec.js\" --require specs/setup.js --require @babel/register --ignore-styles \"specs/**/*.spec@(.js|.jsx)\"",
     "build": "webpack -p --progress",
-    "start": "node ./bin/www",
-    "devRun": "better-npm-run devRun"
+    "clean": "babel-node tools/run clean",
+    "devRun": "better-npm-run devRun",
+    "prodBuild": "better-npm-run prodBuild && webpack -p --progress",
+    "liveRun": "better-npm-run liveRun",
+    "eslint": "eslint --ext .js --fix --ext .jsx core specs --fix",
+    "eslint:fix": "eslint -- --fix --ext .js core",
+    "lint": "npm run eslint"    
   },
   "betterScripts": {
     "devRun": {
