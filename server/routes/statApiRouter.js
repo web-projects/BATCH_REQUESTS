@@ -9,6 +9,28 @@ router.use((req, res, next) => {
   next();
 });
 
+router.get('/get-azure-service-health-checks', (req, res) => {
+  const serviceProvider = new DataServiceProvider();
+  const service = serviceProvider.getStatDataService();
+
+  return service.getHealthCheckDataForIPA5Services(process.env.SERVICES_DEV).then((result) => {
+      res.send(result);
+  }).catch((err) => {
+      res.status(500).send(err.message);
+  });
+});
+
+router.get('/get-azure-service-test-health-checks', (req, res) => {
+  const serviceProvider = new DataServiceProvider();
+  const service = serviceProvider.getStatDataService();
+
+  return service.getHealthCheckDataForIPA5Services(process.env.SERVICES_TEST1).then((result) => {
+      res.send(result);
+  }).catch((err) => {
+      res.status(500).send(err.message);
+  });
+});
+
 router.get('/get-batch-dev', (req, res) => {
   const serviceProvider = new DataServiceProvider();
   const service = serviceProvider.getStatDataService();

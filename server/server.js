@@ -1,5 +1,7 @@
 import express from 'express';
+import timeout from 'connect-timeout';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import https from 'https';
@@ -16,6 +18,25 @@ dotenv.config();
 
 logger.log2('Initiailizing express framework');
 const app = express();
+
+//
+// Adjust the timeout value for express and also ensure that it is
+// the last middleware on the stack. Failure to do so will cause
+// the request flow to stop processing.
+// ------------------------------------------------------------------
+app.use(timeout(120000));
+
+logger.log2('Initializing JSON for Express');
+app.use(express.json());
+
+logger.log2('Express is now configured to parse URL encoded data via querystring lib');
+app.use(express.urlencoded({ extended: false }));
+
+logger.log2('Initializing cookie-parser middleware');
+app.use(cookieParser());
+
+logger.log2('Making public folder accessible');
+app.use(express.static(path.join(__dirname, 'public')));
 
 //
 // Additional routers should all be defined here.
@@ -35,11 +56,13 @@ const renderPage = ((req, res, dataObject) => {
     res.end();
 });
 
-/* GET home page. */
-app.get('/', (req, res, next) => {
-  renderPage('index', { title: 'Express' });
-  next();
-});
+//
+// Top Level Page Endpoints.
+// ------------------------------------------------------------------
+app.get('/',
+  (req, res) => {
+    renderPage(req, res, grip.getHomepageInfo());
+  });
 
 //
 // Catch 404 and forward to error handler.
