@@ -1,0 +1,22 @@
+{
+    "extends": "../.eslintrc",
+    "env": {
+        "mocha": true
+    },
+    "globals": {
+        "expect": false,
+        "should": false,
+        "sinon": false
+    },
+    "rules": {
+        "no-unused-expressions": 0,
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true,
+                "optionalDependencies": false,
+                "peerDependencies": false
+            }
+        ]
+    }
+}

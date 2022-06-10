@@ -1,0 +1,49 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "airbnb"
+    ],
+    "plugins": [
+        "babel",
+        "react",
+        "promise"
+    ],
+    "env": {
+        "browser": true,
+        "jquery": true
+    },
+    "globals": {
+        "__DEV__": false,
+        "__PROD__": false,
+        "__DEBUG__": false,
+        "__COVERAGE__": false,
+        "__BASENAME__": false
+    },
+    "rules": {
+        "global-require": 0,
+        "max-len": [
+            "error",
+            180
+        ],
+        "react/jsx-boolean-value": [
+            "warn",
+            "always"
+        ],
+        "class-methods-use-this": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "no-underscore-dangle": 0,
+        "no-useless-constructor": 0,
+        "no-plusplus": 0,
+        "no-restricted-syntax": 0,
+        "guard-for-in": 0,
+        "new-cap": 0,
+        "no-mixed-operators": 0,
+        "no-bitwise": 0,
+        "no-unused-vars": 1,
+        "indent": "off",
+        "react/forbid-prop-types": 0,
+        "react/prefer-stateless-function": 0,
+        "react/destructuring-assignment": 0,
+        "linebreak-style": "off" /* Handled in gitattributes */
+    }
+}

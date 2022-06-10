@@ -1,0 +1,48 @@
+syntax = "proto3";
+package IPA5.Dashboards.Core.Entities;
+
+// The channel type a specific connection is utilizing.
+enum ChannelType {
+    UnknownChannel = 0;
+    NamedPipes = 1;
+    WebSocket = 2;
+    LongPoll = 3;
+    AzureServiceBus = 4;
+    Isomorphic = 5;
+}
+
+// The type of service as represented in the system.
+enum ServiceType {
+    UnknownService = 0;
+    Dal = 1;
+    ObsoleteListener = 2;
+    Servicer = 3;
+    Receiver = 4;
+    Monitor = 5;
+    Processor = 6;
+    CryptoCache = 7;
+    Broker = 8;
+    AppManager = 9;
+    Updater = 10;
+}
+
+// Represents a connection in the communication broker database.
+message Connection {
+    string connection_id = 1;
+    int32 company_id = 2;
+    string dns_name = 3;
+    string ipv4 = 4;
+    string ipv6 = 5;
+    ServiceType service_type = 6;
+    string username = 7;
+    string broker_owner_id = 8;
+    string workstation_name = 9;
+    string machine_fingerprint = 10;
+    string channel_id = 11;
+    ChannelType channe_type = 12;
+    string license_key = 13;
+    bool is_cloud = 14;
+    string app_version = 15;
+    int64 last_updated_utc = 16;
+    int64 created_utc = 17;
+}

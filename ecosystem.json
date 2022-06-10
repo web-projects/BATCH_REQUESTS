@@ -1,0 +1,9 @@
+{
+    "apps": [{
+        "name": "ipa5dashboards",
+        "script": "server.js",
+        "env": {
+            "NODE_ENV": "production"
+        }
+    }]
+}
