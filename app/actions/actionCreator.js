@@ -93,11 +93,11 @@ export default class ActionCreator {
         return this._makeStatApiCall('/api/stats/get-recent-device-types');
     }
 
-    getAzureServiceHealthCheckResponse() {
-      return this._makeStatApiCall('/api/stats/get-azure-service-health-checks');
-    }
-
-    getAzureServiceTestHealthCheckResponse() {
+    getAzureServiceHealthCheckResponse(environment) {
+      if (environment === 'DEV') {
+        return this._makeStatApiCall('/api/stats/get-azure-service-health-checks');
+      }
+      // assume TEST is the target environment
       return this._makeStatApiCall('/api/stats/get-azure-service-test-health-checks');
     }
 

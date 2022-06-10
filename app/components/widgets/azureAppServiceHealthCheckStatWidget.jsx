@@ -24,7 +24,7 @@ export default class AzureAppServiceHealthCheckStatWidget extends ResponsiveBase
     }
 
     _updateServiceHealthCheckSeen() {
-      this.actionCreator.getAzureServiceHealthCheckResponse().then((result) => {
+      this.actionCreator.getAzureServiceHealthCheckResponse(this.props.environment).then((result) => {
         if (result.length > 0) {
           this.setState({
             isLoading: false,
@@ -101,8 +101,9 @@ export default class AzureAppServiceHealthCheckStatWidget extends ResponsiveBase
           );
         }
 
+        const titleString = `App Service [ ${this.props.environment} ] Direct Health Checks`;
         return (
-          <StatWidgetContainer title="App Service [DEV] Direct Health Checks">
+          <StatWidgetContainer title={titleString}>
             {contents}
           </StatWidgetContainer>
         );
